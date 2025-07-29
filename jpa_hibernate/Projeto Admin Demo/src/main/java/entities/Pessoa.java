@@ -9,13 +9,13 @@ public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String nome;
     private String email;
     private String cpf;
     private LocalDate dataDeNascimento;
 
-    public Pessoa(Integer id, String nome, String email, String cpf, LocalDate dataDeNascimento) {
+    public Pessoa(Long id, String nome, String email, String cpf, LocalDate dataDeNascimento) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -23,12 +23,8 @@ public class Pessoa {
         this.dataDeNascimento = dataDeNascimento;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -61,5 +57,16 @@ public class Pessoa {
 
     public void setDataDeNascimento(LocalDate dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", dataDeNascimento=" + dataDeNascimento +
+                '}';
     }
 }
