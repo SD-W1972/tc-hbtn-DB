@@ -14,13 +14,31 @@ public class Pessoa {
     private String email;
     private String cpf;
     private LocalDate dataDeNascimento;
+    private int idade;
 
-    public Pessoa(Long id, String nome, String email, String cpf, LocalDate dataDeNascimento) {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public Pessoa(Long id, String nome, String email, String cpf, LocalDate dataDeNascimento, int idade) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
         this.dataDeNascimento = dataDeNascimento;
+        this.idade = idade;
+    }
+
+    public Pessoa() {
+
     }
 
     public Long getId() {

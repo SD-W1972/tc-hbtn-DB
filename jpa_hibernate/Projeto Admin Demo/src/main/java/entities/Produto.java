@@ -21,6 +21,11 @@ public class Produto {
         this.preco = preco;
         this.status = status;
     }
+
+    public Produto() {
+
+    }
+
     public Long getId() {
         return id;
     }
