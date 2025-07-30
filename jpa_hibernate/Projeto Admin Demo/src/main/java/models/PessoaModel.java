@@ -1,85 +1,87 @@
 package models;
 
+import entities.Pessoa;
 import entities.Produto;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProdutoModel {
-    public void create(Produto p){
+public class PessoaModel {
+
+    public void create(Pessoa p){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
         EntityManager em = emf.createEntityManager();
 
         try{
-            System.out.println("Iniciando a transação");
+            System.out.println("Iniciando transação");
             em.getTransaction().begin();
             em.persist(p);
             em.getTransaction().commit();
-            System.out.println("Produto criado com sucesso !!!");
+            System.out.println("Pessoa registrada com sucesso !!!");
         }catch(Exception e){
             em.close();
-            System.err.println("Erro ao criar o produto !!!" + e.getMessage());
+            System.err.println("Erro ao registrar a pessoa !!!" + e.getMessage());
         }finally{
             em.close();
             System.out.println("Finalizando a transação");
         }
     }
 
-    public Produto findById(Long id){
+    public Pessoa findById(Long id){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
         EntityManager em = emf.createEntityManager();
-        Produto produto = null;
+        Pessoa pessoa = null;
         try{
-            System.out.println("Iniciando a transação");
+            System.out.println("Iniciando transação");
             em.getTransaction().begin();
-            produto = em.find(Produto.class, id);
-            em.getTransaction().commit();
-            System.out.println("Produto encontrado com sucesso !!!");
+            pessoa = em.find(Pessoa.class, id);
+            if(pessoa == null){
+                System.out.println("Pessoa com ID" + id + " nao encontrada no db");
+            }
+            System.out.println("Pessoa encontrada com sucesso !!!");
         }catch(Exception e){
             em.close();
-            System.err.println("Erro ao procurar o produto !!!" + e.getMessage());
+            System.err.println("Erro ao procurar a pessoa !!!" + e.getMessage());
         }finally{
             em.close();
+            emf.close();
+
             System.out.println("Finalizando a transação");
         }
-        
-        return produto;
+
+        return pessoa;
     }
 
-    public List<Produto> findAll(){
+    public List<Pessoa> findAll(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
         EntityManager em = emf.createEntityManager();
-        List<Produto> produtos = new ArrayList<>();
 
+        List<Pessoa> pessoas = new ArrayList<>();
         try{
-            TypedQuery<Produto> query = em.createQuery("SELECT p FROM Produto p", Produto.class);
-            produtos = query.getResultList();
-            System.out.println("Total de produtos encontrados: " + produtos.size());
+            TypedQuery<Pessoa> query = em.createQuery("SELECT p from Pessoa p", Pessoa.class);
+            pessoas = query.getResultList();
         }catch(Exception e){
-            System.err.println("Erro ao buscar todos os produtos !!! " + e.getMessage());
-        } finally {
+            System.err.println("Erro ao buscar todos os produtos !!!" + e.getMessage());
+        }finally{
             em.close();
             emf.close();
         }
 
-        return produtos;
+        return pessoas;
     }
 
-    public void update(Produto p){
+    public void update(Pessoa p){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
         EntityManager em = emf.createEntityManager();
 
         try{
-           em.getTransaction().begin();
-           em.merge(p);
-           em.getTransaction().commit();
+            em.getTransaction().begin();
+            em.merge(p);
+            em.getTransaction().commit();
         }catch(Exception e){
             em.getTransaction().rollback();
-            System.err.println("Erro ao atualizar o produto !!!" + e.getMessage());
+            System.err.println("Erro ao atualizar a pessoa !!!" + e.getMessage());
         }finally{
             em.close();
             emf.close();
@@ -87,7 +89,7 @@ public class ProdutoModel {
         }
     }
 
-    public void delete(Produto p){
+    public void delete(Pessoa p){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-jpa");
         EntityManager em = emf.createEntityManager();
 
@@ -97,12 +99,12 @@ public class ProdutoModel {
             em.getTransaction().commit();
         }catch(Exception e){
             em.getTransaction().rollback();
-            System.err.println("Erro ao deletar o produto !!!" + e.getMessage());
+            System.err.println("Erro ao deletar a pessoa !!!" + e.getMessage());
         }finally{
             em.close();
             emf.close();
-
         }
 
     }
+
 }
