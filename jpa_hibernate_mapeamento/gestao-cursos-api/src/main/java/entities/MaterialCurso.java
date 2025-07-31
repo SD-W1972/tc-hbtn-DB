@@ -1,9 +1,6 @@
 package entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class MaterialCurso {
@@ -15,6 +12,18 @@ public class MaterialCurso {
     private Long id;
 
     private String url;
+
+    @OneToOne
+    @JoinColumn(name = "curso_id", nullable = false)
+    private Curso curso;
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
 
     public MaterialCurso(String url) {
         this.url = url;

@@ -16,6 +16,25 @@ public class Curso {
     @ManyToMany(mappedBy = "cursos")
     private List<Aluno> alunos = new ArrayList<>();
 
+    @OneToOne(mappedBy = "curso", cascade = CascadeType.ALL)
+    private MaterialCurso materialCursoList;
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+
+    public List<MaterialCurso> getMaterialCursoList() {
+        return materialCursoList;
+    }
+
+    public void setMaterialCursoList(List<MaterialCurso> materialCursoList) {
+        this.materialCursoList = materialCursoList;
+    }
+
     public Curso(String nome, String sigla) {
         this.nome = nome;
         this.sigla = sigla;
