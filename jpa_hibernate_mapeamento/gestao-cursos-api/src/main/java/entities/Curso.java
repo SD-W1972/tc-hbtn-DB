@@ -43,14 +43,6 @@ public class Curso {
         this.alunos = alunos;
     }
 
-    public List<MaterialCurso> getMaterialCursoList() {
-        return materialCursoList;
-    }
-
-    public void setMaterialCursoList(List<MaterialCurso> materialCursoList) {
-        this.materialCursoList = materialCursoList;
-    }
-
     public Curso(String nome, String sigla) {
         this.nome = nome;
         this.sigla = sigla;
