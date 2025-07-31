@@ -1,9 +1,8 @@
 package entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Professor {
@@ -14,6 +13,10 @@ public class Professor {
     private String nomeCompleto;
     private String matricula;
     private String email;
+
+    @OneToMany
+            (mappedBy = "professor", cascade = CascadeType.ALL)
+    List<Curso> cursos = new ArrayList<>();
 
     public Professor(String nomeCompleto, String matricula, String email) {
         this.nomeCompleto = nomeCompleto;

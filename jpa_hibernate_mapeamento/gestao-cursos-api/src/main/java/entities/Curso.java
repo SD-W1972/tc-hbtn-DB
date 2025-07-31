@@ -19,6 +19,22 @@ public class Curso {
     @OneToOne(mappedBy = "curso", cascade = CascadeType.ALL)
     private MaterialCurso materialCursoList;
 
+    @ManyToOne
+    @JoinColumn(name = "professor_id")
+    private Professor professor;
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    public void setMaterialCursoList(MaterialCurso materialCursoList) {
+        this.materialCursoList = materialCursoList;
+    }
+
     public List<Aluno> getAlunos() {
         return alunos;
     }

@@ -17,6 +17,7 @@ public class MaterialCurso {
     @JoinColumn(name = "curso_id", nullable = false)
     private Curso curso;
 
+
     public Curso getCurso() {
         return curso;
     }
