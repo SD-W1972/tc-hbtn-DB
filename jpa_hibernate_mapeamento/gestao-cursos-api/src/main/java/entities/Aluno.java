@@ -29,6 +29,16 @@ public class Aluno {
     @OneToMany(mappedBy= "aluno", cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
 
+    public void adicionarCurso(Curso curso){
+        this.cursos.add(curso);
+    }
+    public void adicionarTelefone(Telefone telefone){
+        this.telefones.add(telefone);
+    }
+    public void adicionarEndereco(Endereco endereco){
+        this.enderecos.add(endereco);
+    }
+
     public List<Endereco> getEnderecos() {
         return enderecos;
     }
