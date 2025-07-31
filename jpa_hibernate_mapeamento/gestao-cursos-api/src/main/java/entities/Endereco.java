@@ -1,9 +1,6 @@
 package entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Endereco {
@@ -21,6 +18,18 @@ public class Endereco {
     private String cidade;
     private String estado;
     private Integer cep;
+
+    @ManyToOne
+    @JoinColumn(name = "aluno_id")
+    private Aluno aluno;
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
 
     public Endereco(String logradouro, String endereco, String numero, String bairro, String cidade, String estado, Integer cep) {
         this.logradouro = logradouro;

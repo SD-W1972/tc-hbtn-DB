@@ -1,9 +1,8 @@
 package entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Curso {
@@ -13,6 +12,9 @@ public class Curso {
 
     private String nome;
     private String sigla;
+
+    @ManyToMany(mappedBy = "cursos")
+    private List<Aluno> alunos = new ArrayList<>();
 
     public Curso(String nome, String sigla) {
         this.nome = nome;

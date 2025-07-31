@@ -1,10 +1,9 @@
 package entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Aluno {
@@ -15,6 +14,44 @@ public class Aluno {
     private String matricula;
     private Date nascimento;
     private String email;
+
+    @ManyToMany
+    @JoinTable(
+            name = "aluno_curso",
+            joinColumns = @JoinColumn(name = "aluno_id"),
+            inverseJoinColumns = @JoinColumn(name = "curso_id")
+    )
+    private List<Curso> cursos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
+    private List<Telefone> telefones = new ArrayList<>();
+
+    @OneToMany(mappedBy= "aluno", cascade = CascadeType.ALL)
+    private List<Endereco> enderecos = new ArrayList<>();
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
+    }
 
     public Aluno(String nomeCompleto, String matricula, Date nascimento, String email) {
 
