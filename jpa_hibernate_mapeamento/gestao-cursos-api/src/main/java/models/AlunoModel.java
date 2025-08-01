@@ -72,6 +72,26 @@ public class AlunoModel {
         return alunos;
     }
 
+    public void update(Aluno aluno) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-api");
+        EntityManager em = emf.createEntityManager();
+
+        try{
+            em.getTransaction().begin();
+            em.merge(aluno);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+            em.close();
+            System.out.println("Erro ao fazer update do aluno com id " + aluno.getId() + " por favor tente " +
+                    "novamente mais tarde");
+        }finally{
+            em.close();
+            emf.close();
+
+            System.out.println("Finalizando a transação");
+        }
+    }
 
     public void delete(Aluno aluno) {
 
