@@ -13,6 +13,11 @@ public class MaterialCurso {
 
     private String url;
 
+    public MaterialCurso(String url, Curso curso) {
+        this.url = url;
+        this.curso = curso;
+    }
+
     @OneToOne
     @JoinColumn(name = "curso_id", nullable = false)
     private Curso curso;
