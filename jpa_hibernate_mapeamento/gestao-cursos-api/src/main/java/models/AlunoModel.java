@@ -39,6 +39,7 @@ public class AlunoModel {
             if(aluno == null){
                 System.out.println("Aluno com ID " + id + "não encontrada no banco de dados !!!");
             }
+            System.out.println("Aluno " + aluno.getNomeCompleto() + " " + aluno.getId() + " encontrado com sucesso");
         }catch(Exception e){
             em.close();
             System.err.println("Erro ao procurar Aluno de ID " + id + " " + e.getMessage());
@@ -57,9 +58,11 @@ public class AlunoModel {
         EntityManager em = emf.createEntityManager();
 
         try{
+            System.out.println("Iniciando transação");
             em.getTransaction().begin();
             TypedQuery<Aluno> query = em.createQuery("SELECT p from Aluno p", Aluno.class);
             alunos = query.getResultList();
+            System.out.println("Lista de alunos retornada com sucesso");
         }catch(Exception e){
             em.close();
             System.err.println("Erro ao buscar  todas as pessoas " +  e.getMessage());
@@ -77,9 +80,11 @@ public class AlunoModel {
         EntityManager em = emf.createEntityManager();
 
         try{
+            System.out.println("Iniciando transação ");
             em.getTransaction().begin();
             em.merge(aluno);
             em.getTransaction().commit();
+            System.out.println("Aluno com ID " + aluno.getId() + " atualizado no banco de dados");
         }catch(Exception e){
             em.getTransaction().rollback();
             em.close();
