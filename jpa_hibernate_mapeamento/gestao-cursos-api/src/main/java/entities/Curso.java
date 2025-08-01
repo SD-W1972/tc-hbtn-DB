@@ -13,6 +13,14 @@ public class Curso {
     private String nome;
     private String sigla;
 
+    public Curso(String nome, String sigla, List<Aluno> alunos, MaterialCurso materialCursoList, Professor professor) {
+        this.nome = nome;
+        this.sigla = sigla;
+        this.alunos = alunos;
+        this.materialCursoList = materialCursoList;
+        this.professor = professor;
+    }
+
     @ManyToMany(mappedBy = "cursos")
     private List<Aluno> alunos = new ArrayList<>();
 
