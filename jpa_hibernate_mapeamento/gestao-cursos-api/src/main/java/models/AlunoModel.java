@@ -94,6 +94,23 @@ public class AlunoModel {
     }
 
     public void delete(Aluno aluno) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-api");
+        EntityManager em = emf.createEntityManager();
 
+        try{
+            System.out.println("Iniciando transação");
+         em.getTransaction().begin();
+         em.remove(aluno);
+         em.getTransaction().commit();
+         System.out.println("Aluno com ID " + aluno.getId() + " deletado com sucesso");
+        }catch(Exception e){
+            em.getTransaction().rollback();
+            em.close();
+            System.out.println("Erro ao deletar aluno com ID " + aluno.getId());
+        }finally{
+            em.close();
+            emf.close();
+            System.out.println("Finalizando transação");
+        }
     }
 }
