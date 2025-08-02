@@ -84,12 +84,18 @@ public class GestaoCursosMain {
             //Read
             System.out.println("Buscando aluno pelo id  " + a1.getId());
             Aluno alunoBuscar = alunoModel.findById(a1.getId());
-            System.out.println("Aluno de ID 0 " + alunoBuscar.getNomeCompleto() + " encontrado");
-
+         if(alunoBuscar != null) {
+             System.out.println("Aluno de ID " + a1.getId() + " e nome " + alunoBuscar.getNomeCompleto() + " encontrado");
+         }else{
+            System.out.println("Aluno com ID " + a1.getId() + " nao existe no banco de dados");
+         }
             System.out.println("Buscando curso pelo id " + c1.getId());
             Curso cursoBuscar = cursoModel.findById(c1.getId());
-            System.out.println("Curso de ID 0 " + cursoBuscar.getNome() + " encontrado com sucesso");
-
+          if(cursoBuscar != null) {
+              System.out.println("Curso de ID 0 " + cursoBuscar.getNome() + " encontrado com sucesso");
+          }else{
+              System.out.println("Curso com ID " + c1.getId() + " nao existe no banco de dados");
+          }
             System.out.println("Buscando todos os alunos");
             List<Aluno> todosAlunos = alunoModel.findAll();
             System.out.println("Sucesso !");
