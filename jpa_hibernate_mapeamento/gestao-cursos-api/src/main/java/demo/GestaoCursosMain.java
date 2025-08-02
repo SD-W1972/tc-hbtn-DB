@@ -110,7 +110,7 @@ public class GestaoCursosMain {
             System.out.println("Curso deletado. Lista atual de cursos: " + cursoModel.findAll());
 
         }catch(Exception e){
-
+            e.printStackTrace();
         }
     }
 
