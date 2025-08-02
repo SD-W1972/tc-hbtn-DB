@@ -5,6 +5,9 @@ import javax.persistence.*;
 @Entity
 public class MaterialCurso {
 
+    public MaterialCurso(){
+
+    }
     @Id
     @GeneratedValue(
             strategy = GenerationType.IDENTITY

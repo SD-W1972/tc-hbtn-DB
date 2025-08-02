@@ -4,6 +4,10 @@ import javax.persistence.*;
 
 @Entity
 public class Telefone {
+
+    public Telefone(){
+
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

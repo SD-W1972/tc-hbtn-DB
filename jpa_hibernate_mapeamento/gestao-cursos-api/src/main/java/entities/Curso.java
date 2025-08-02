@@ -6,6 +6,10 @@ import java.util.List;
 
 @Entity
 public class Curso {
+
+    public Curso(){
+
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -7,6 +7,10 @@ import java.util.List;
 
 @Entity
 public class Aluno {
+
+    public Aluno(){
+
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

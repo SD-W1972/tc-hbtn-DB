@@ -5,6 +5,9 @@ import javax.persistence.*;
 @Entity
 public class Endereco {
 
+    public Endereco(){
+
+    }
     @Id
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
