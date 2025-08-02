@@ -38,8 +38,9 @@ public class CursoModel {
             Curso = em.find(Curso.class, id);
             if(Curso == null){
                 System.out.println("Curso com ID " + id + "não encontrada no banco de dados !!!");
+            }else {
+                System.out.println("Curso com id" + Curso.getId() + " encontrado com sucesso");
             }
-            System.out.println("Curso com id" + Curso.getId() + " encontrado com sucesso");
         }catch(Exception e){
             em.close();
             System.err.println("Erro ao procurar Curso de ID " + id + " " + e.getMessage());
@@ -104,11 +105,16 @@ public class CursoModel {
 
         try{
             System.out.println("Iniciando transação");
+         if(Curso != null){
             em.getTransaction().begin();
             em.remove(Curso);
             em.getTransaction().commit();
             System.out.println("Curso com ID " + Curso.getId() + " deletado com sucesso");
-        }catch(Exception e){
+        }else{
+             System.out.println("Curso com ID " + Curso.getId() + " nao encontrado no banco de dados");
+
+         }
+         }catch(Exception e){
             em.getTransaction().rollback();
             em.close();
             System.out.println("Erro ao deletar Curso com ID " + Curso.getId());

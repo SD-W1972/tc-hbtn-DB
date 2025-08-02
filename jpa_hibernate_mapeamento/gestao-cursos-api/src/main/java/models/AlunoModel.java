@@ -38,8 +38,9 @@ public class AlunoModel {
             aluno = em.find(Aluno.class, id);
             if(aluno == null){
                 System.out.println("Aluno com ID " + id + " não encontrado no banco de dados !!!");
+            }else {
+                System.out.println("Aluno " + aluno.getNomeCompleto() + " " + aluno.getId() + " encontrado com sucesso");
             }
-            System.out.println("Aluno " + aluno.getNomeCompleto() + " " + aluno.getId() + " encontrado com sucesso");
         }catch(Exception e){
             em.close();
             System.err.println("Erro ao procurar Aluno de ID " + id + " " + e.getMessage());
@@ -82,9 +83,13 @@ public class AlunoModel {
         try{
             System.out.println("Iniciando transação ");
             em.getTransaction().begin();
+        if(aluno != null) {
             em.merge(aluno);
             em.getTransaction().commit();
             System.out.println("Aluno com ID " + aluno.getId() + " atualizado no banco de dados");
+        }else{
+            System.out.println("Aluno com ID " + aluno.getId() + " nao encontrado no banco de dados");
+        }
         }catch(Exception e){
             em.getTransaction().rollback();
             em.close();
@@ -104,11 +109,15 @@ public class AlunoModel {
 
         try{
             System.out.println("Iniciando transação");
-         em.getTransaction().begin();
-         em.remove(aluno);
-         em.getTransaction().commit();
-         System.out.println("Aluno com ID " + aluno.getId() + " deletado com sucesso");
-        }catch(Exception e){
+            if(aluno != null) {
+                em.getTransaction().begin();
+                em.remove(aluno);
+                em.getTransaction().commit();
+                System.out.println("Aluno com ID " + aluno.getId() + " deletado com sucesso");
+            }else{
+                System.out.println("Aluno com ID " + aluno.getId() + " nao encontrado no banco de dados");
+            }
+            }catch(Exception e){
             em.getTransaction().rollback();
             em.close();
             System.out.println("Erro ao deletar aluno com ID " + aluno.getId());
