@@ -12,11 +12,10 @@ public class MaterialCurso {
     private Long id;
 
     private String url;
-
-    public MaterialCurso(String url, Curso curso) {
+    public MaterialCurso(String url) {
         this.url = url;
-        this.curso = curso;
     }
+
 
     @OneToOne
     @JoinColumn(name = "curso_id", nullable = false)
@@ -29,10 +28,6 @@ public class MaterialCurso {
 
     public void setCurso(Curso curso) {
         this.curso = curso;
-    }
-
-    public MaterialCurso(String url) {
-        this.url = url;
     }
 
     public Long getId() {
