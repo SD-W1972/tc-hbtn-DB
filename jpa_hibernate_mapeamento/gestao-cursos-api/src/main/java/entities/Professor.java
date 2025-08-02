@@ -24,6 +24,14 @@ public class Professor {
         this.email = email;
     }
 
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }
+
     public Long getId() {
         return id;
     }

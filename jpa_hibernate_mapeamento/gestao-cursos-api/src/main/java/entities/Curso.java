@@ -36,8 +36,8 @@ public class Curso {
         this.professor = professor;
     }
 
-    public void setMaterialCursoList(MaterialCurso materialCursoList) {
-        this.materialCursoList = materialCursoList;
+    public void setMaterialCurso(MaterialCurso materialCurso) {
+        this.materialCursoList = materialCurso;
     }
 
     public List<Aluno> getAlunos() {
