@@ -44,4 +44,13 @@ public class MaterialCurso {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    @Override
+    public String toString() {
+        return "MaterialCurso{" +
+                "id=" + id +
+                ", url='" + url + '\'' +
+                ", curso=" + curso +
+                '}';
+    }
 }

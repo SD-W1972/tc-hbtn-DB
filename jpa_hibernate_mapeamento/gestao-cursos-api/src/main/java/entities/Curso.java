@@ -76,4 +76,16 @@ public class Curso {
     public void setSigla(String sigla) {
         this.sigla = sigla;
     }
+
+    @Override
+    public String toString() {
+        return "Curso{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", sigla='" + sigla + '\'' +
+                ", alunos=" + alunos +
+                ", materialCursoList=" + materialCursoList +
+                ", professor=" + professor +
+                '}';
+    }
 }

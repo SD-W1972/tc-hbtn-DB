@@ -111,4 +111,18 @@ public class Aluno {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "id=" + id +
+                ", nomeCompleto='" + nomeCompleto + '\'' +
+                ", matricula='" + matricula + '\'' +
+                ", nascimento=" + nascimento +
+                ", email='" + email + '\'' +
+                ", cursos=" + cursos +
+                ", telefones=" + telefones +
+                ", enderecos=" + enderecos +
+                '}';
+    }
 }
