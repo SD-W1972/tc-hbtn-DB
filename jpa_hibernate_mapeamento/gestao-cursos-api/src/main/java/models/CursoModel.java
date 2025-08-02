@@ -76,7 +76,7 @@ public class CursoModel {
     }
 
     public void update(Curso Curso) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-api");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-jpa");
         EntityManager em = emf.createEntityManager();
 
         try{
@@ -99,7 +99,7 @@ public class CursoModel {
     }
 
     public void delete(Curso Curso) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-api");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-jpa");
         EntityManager em = emf.createEntityManager();
 
         try{

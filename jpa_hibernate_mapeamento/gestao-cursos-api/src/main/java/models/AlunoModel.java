@@ -37,7 +37,7 @@ public class AlunoModel {
             em.getTransaction().begin();
             aluno = em.find(Aluno.class, id);
             if(aluno == null){
-                System.out.println("Aluno com ID " + id + "não encontrada no banco de dados !!!");
+                System.out.println("Aluno com ID " + id + " não encontrado no banco de dados !!!");
             }
             System.out.println("Aluno " + aluno.getNomeCompleto() + " " + aluno.getId() + " encontrado com sucesso");
         }catch(Exception e){
@@ -76,7 +76,7 @@ public class AlunoModel {
     }
 
     public void update(Aluno aluno) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-api");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-jpa");
         EntityManager em = emf.createEntityManager();
 
         try{
@@ -99,7 +99,7 @@ public class AlunoModel {
     }
 
     public void delete(Aluno aluno) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-api");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-jpa");
         EntityManager em = emf.createEntityManager();
 
         try{
