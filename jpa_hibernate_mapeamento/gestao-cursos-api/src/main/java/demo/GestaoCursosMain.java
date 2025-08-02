@@ -4,9 +4,6 @@ import entities.*;
 import models.AlunoModel;
 import models.CursoModel;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,12 +16,6 @@ public class GestaoCursosMain {
         Date d1 = new Date();
         Calendar calendar = Calendar.getInstance();
         d1 = calendar.getTime();
-
-        Professor p1 = new Professor(
-                "Professor Maneiro",
-                "matricula dahora",
-                "professor@maneiro.com.mail.br"
-        );
 
         Aluno a1 = new Aluno("Fulaninho de Tal",
                 "00001", d1,
@@ -52,6 +43,12 @@ public class GestaoCursosMain {
                 "https:://link.redirect-mc1.com"
         );
 
+        Professor p1 = new Professor(
+              "Professor Maneiro",
+              "matricula dahora",
+              "professor@maneiro.com.mail.br"
+        );
+
         List<Telefone> telefones = new ArrayList<>();
         telefones.add(t1);
         List<Endereco> enderecos = new ArrayList<>();
@@ -61,32 +58,21 @@ public class GestaoCursosMain {
         List<Aluno> alunos = new ArrayList<>();
         alunos.add(a1);
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-jpa");
-        EntityManager em = emf.createEntityManager();
-
-        try {
-            em.getTransaction().begin();
-            em.persist(p1);
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
-
+        //adicionando relacoes entre as entidades mapeadas
         a1.setTelefones(telefones);
         a1.setEnderecos(enderecos);
         a1.setCursos(cursos);
 
         t1.setAluno(a1);
         e1.setAluno(a1);
-
         c1.setAlunos(alunos);
-        c1.setProfessor(p1);
-        c1.setMaterialCurso(mc1);
-        mc1.setCurso(c1);
 
         p1.setCursos(cursos);
-
+        mc1.setCurso(c1);
+        c1.setMaterialCurso(mc1);
+        c1.setProfessor(p1);
         try{
+            //Create
             System.out.println("Criando aluno " + a1.getNomeCompleto());
             alunoModel.create(a1);
             System.out.println("Aluno criado");
@@ -95,13 +81,14 @@ public class GestaoCursosMain {
             cursoModel.create(c1);
             System.out.println("Curso criado");
 
-            System.out.println("Buscando aluno pelo id 1 ");
-            Aluno alunoBuscar = alunoModel.findById(1L);
-            System.out.println("Aluno de ID 1 " + alunoBuscar.getNomeCompleto() + " encontrado");
+            //Read
+            System.out.println("Buscando aluno pelo id  " + a1.getId());
+            Aluno alunoBuscar = alunoModel.findById(a1.getId());
+            System.out.println("Aluno de ID 0 " + alunoBuscar.getNomeCompleto() + " encontrado");
 
-            System.out.println("Buscando curso pelo id 1");
-            Curso cursoBuscar = cursoModel.findById(1L);
-            System.out.println("Curso de ID 1 " + cursoBuscar.getNome() + " encontrado com sucesso");
+            System.out.println("Buscando curso pelo id " + c1.getId());
+            Curso cursoBuscar = cursoModel.findById(c1.getId());
+            System.out.println("Curso de ID 0 " + cursoBuscar.getNome() + " encontrado com sucesso");
 
             System.out.println("Buscando todos os alunos");
             List<Aluno> todosAlunos = alunoModel.findAll();
@@ -114,21 +101,24 @@ public class GestaoCursosMain {
             List<Curso> todosCursos = cursoModel.findAll();
             System.out.println("Sucesso !");
             for(Curso c : todosCursos){
-                System.out.println("Curso nº " + c.getId() + " de nome: " + c.getNome() + " encontrado");
+                System.out.println("Aluno nº " + c.getId() + " de nome: " + c.getNome() + " encontrado");
             }
 
-            System.out.println("Testando update do Aluno 1 (mudança de nome)");
+            //Update
+
+            System.out.println("Testando update do Aluno 0 (mudança de nome)");
             System.out.println("Nome atual: " + a1.getNomeCompleto());
             a1.setNomeCompleto("beltrano de tal");
             alunoModel.update(a1);
             System.out.println("Sucesso! Nome atualizado: " + a1.getNomeCompleto());
 
-            System.out.println("Testando update do Curso 1 (mudança de nome)");
+            System.out.println("Testando update do Curso 0 (mudança de nome)");
             System.out.println("Nome atual: " + c1.getNome());
-            c1.setNome("Curso dahorinha");
+            c1.setNome("Curso dahorinha ");
             cursoModel.update(c1);
             System.out.println("Sucesso! Nome atualizado: " + c1.getNome());
 
+            //Delete
             System.out.println("Lista atual de alunos: " + alunoModel.findAll());
             System.out.println("Deletando um aluno da DB");
 
@@ -143,8 +133,7 @@ public class GestaoCursosMain {
 
         }catch(Exception e){
             e.printStackTrace();
-        } finally {
-            emf.close();
         }
     }
+
 }
