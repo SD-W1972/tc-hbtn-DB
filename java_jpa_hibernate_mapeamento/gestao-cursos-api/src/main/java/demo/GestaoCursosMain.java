@@ -107,7 +107,7 @@ public class GestaoCursosMain {
             List<Curso> todosCursos = cursoModel.findAll();
             System.out.println("Sucesso !");
             for(Curso c : todosCursos){
-                System.out.println("Aluno nº " + c.getId() + " de nome: " + c.getNome() + " encontrado");
+                System.out.println("Curso nº " + c.getId() + " de nome: " + c.getNome() + " encontrado");
             }
 
             //Update
