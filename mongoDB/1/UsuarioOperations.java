@@ -1,4 +1,5 @@
 import com.mongodb.client.MongoCollection;
+import org.bson.BsonDocument;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -41,8 +42,20 @@ public class UsuarioOperations {
             for(Usuario u : usuarios){
                 System.out.println(u.getNome());
             }
+            System.err.println(e.getMessage());
         }
     }
 
+    //CRUD - Update
+    public void updateUsuario(Usuario usuario){
+        try{
+            Document documento = usuario.toDocument();
+            BsonDocument bsonDocument = usuario.toDocument().toBsonDocument();
+            collection.updateOne(bsonDocument, documento);
+            System.out.println("Usuario atualizado com sucesso: " + usuario.getNome());
+        }catch (Exception e){
+         System.err.println("Erro ao fazer update do usuario: " + usuario.getNome() + " " + e.getMessage());
+        }
+    }
 
 }
