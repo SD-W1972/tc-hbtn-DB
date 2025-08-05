@@ -1,4 +1,5 @@
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import org.bson.BsonDocument;
 import org.bson.Document;
 
@@ -8,13 +9,10 @@ import java.util.stream.Collectors;
 
 
 public class UsuarioOperations {
-    private MongoDBConnection mdbConnection;
-    private MongoCollection<Document> collection;
-    private static final String COLLECTION_NAME = "usuarios";
+    private static MongoCollection<Document> collection;
 
-    public UsuarioOperations(MongoDBConnection mdbConnection, MongoCollection<Document> collection) {
-        this.mdbConnection = mdbConnection;
-        this.collection = collection;
+    public UsuarioOperations(MongoDatabase mongoDatabase) {
+        this.collection = mongoDatabase.getCollection("usuarios");
     }
 
     //CRUD - Create
@@ -83,4 +81,6 @@ public class UsuarioOperations {
             System.err.println("Erro ao deletar usuario: " + usuario.getNome() + " " + e.getMessage());
         }
     }
+
+
 }
