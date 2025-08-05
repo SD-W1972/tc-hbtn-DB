@@ -4,6 +4,7 @@ import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class UsuarioOperations {
@@ -43,6 +44,21 @@ public class UsuarioOperations {
                 System.out.println(u.getNome());
             }
             System.err.println(e.getMessage());
+        }
+    }
+
+    //CRUD - Read
+    public List<Usuario> readAllUsuarios() {
+        try {
+            return collection.find()
+                    .into(new ArrayList<>())
+                    .stream()
+                    .map(Usuario::fromDocument)
+                    .collect(Collectors.toList());
+
+        } catch (Exception e) {
+            System.err.println("Erro ao consultar usuários: " + e.getMessage());
+            return new ArrayList<>();
         }
     }
 
