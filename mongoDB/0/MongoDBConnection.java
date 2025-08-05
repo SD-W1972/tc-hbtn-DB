@@ -1,4 +1,3 @@
-package org.mongodb;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
