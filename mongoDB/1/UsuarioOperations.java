@@ -47,18 +47,17 @@ public class UsuarioOperations {
         }
     }
 
-    //CRUD - Read
-    public List<Usuario> readAllUsuarios() {
-        try {
-            return collection.find()
-                    .into(new ArrayList<>())
+    //CRUD - Read All
+    public List<Usuario> readAllUsuarios(){
+        try{
+            return collection.find().into(new ArrayList<>())
                     .stream()
                     .map(Usuario::fromDocument)
                     .collect(Collectors.toList());
 
-        } catch (Exception e) {
+        }catch(Exception e){
             System.err.println("Erro ao consultar usuários: " + e.getMessage());
-            return new ArrayList<>();
+            return null;
         }
     }
 
@@ -74,4 +73,14 @@ public class UsuarioOperations {
         }
     }
 
+    //CRUD - Delete
+    public void deleteUsuario(Usuario usuario){
+        try{
+            BsonDocument bsonDocument = usuario.toDocument().toBsonDocument();
+            collection.deleteOne(bsonDocument);
+            System.out.println("Usuario deletado com sucesso: " + usuario.getNome());
+        }catch(Exception e){
+            System.err.println("Erro ao deletar usuario: " + usuario.getNome() + " " + e.getMessage());
+        }
+    }
 }
