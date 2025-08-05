@@ -1,3 +1,5 @@
+import org.bson.Document;
+
 public class Usuario {
     private String nome;
     private int idade;
@@ -35,4 +37,16 @@ public class Usuario {
     public Usuario(){
 
     }
+
+    public Document toDocument() {
+        return new Document("nome", nome)
+                .append("idade", idade);
+    }
+
+
+    public static Usuario fromDocument(Document document) {
+        return new Usuario(document.getString("nome"), document.getInteger("idade"));
+    }
+
+
 }
