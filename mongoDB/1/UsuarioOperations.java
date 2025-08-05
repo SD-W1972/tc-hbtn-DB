@@ -1,6 +1,6 @@
 import com.mongodb.client.MongoCollection;
+import org.bson.Document;
 
-import javax.swing.text.Document;
 
 public class UsuarioOperations {
     private MongoDBConnection mdbConnection;
