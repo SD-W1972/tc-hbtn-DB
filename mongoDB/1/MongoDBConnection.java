@@ -1,4 +1,3 @@
-
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
@@ -10,13 +9,13 @@ import java.util.List;
 
 
 public class MongoDBConnection {
-
-
     // Variáveis de configuração
     private static final String USERNAME = "anthonybemol";
     private static final String PASSWORD = "Qk5sb4AptD1HmT0U";
-    private static final String CLUSTER_URL = "cluster0.brbyr.mongodb.net"; // Substitua pelo seu cluster se for diferente
+    private static final String CLUSTER_URL = "cluster0.3wxmmwl.mongodb.net"; // Substitua pelo seu cluster se for diferente
     private static final String DATABASE_NAME = "Cluster0"; // Substitua pelo nome do seu banco de dados
+
+//mongodb+srv://anthonybemol:Qk5sb4AptD1HmT0U@cluster0.3wxmmwl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
 
     private MongoClient mongoClient;
@@ -45,6 +44,38 @@ public class MongoDBConnection {
 
 
             System.out.println("Conexão estabelecida com sucesso ao MongoDB!");
+
+
+            UsuarioOperations usuarioOperations = new UsuarioOperations(database);
+
+            Usuario u1 = new Usuario("Alice", 25);
+            Usuario u2 = new Usuario("Bob", 30);
+            Usuario u3 = new Usuario("Charlie", 35);
+
+            System.out.println("Criando usuarios Alice, Bob e Charlie");
+            List<Usuario> usuarios = new ArrayList<>();
+            usuarios.add(u1);
+            usuarios.add(u2);
+            usuarios.add(u3);
+
+            usuarioOperations.insertUsuariosList(usuarios);
+
+
+            System.out.println("Alterando a idade de Bob de 30 para 32 anos:");
+            u2.setIdade(32);
+            usuarioOperations.updateUsuario(u2);
+
+            System.out.println("Consultando todos os registros: ");
+            List<Usuario> todosUsuarios = usuarioOperations.readAllUsuarios();
+            todosUsuarios.forEach(u -> System.out.println(u.toString()));
+
+            System.out.println("Deletando Charlie");
+            usuarioOperations.deleteUsuario(u3);
+
+            System.out.println("Consultando todos os registros: ");
+            todosUsuarios = usuarioOperations.readAllUsuarios();
+            todosUsuarios.forEach(u -> System.out.println(u.toString()));
+
         } catch (Exception e) {
             System.err.println("Erro ao conectar ao MongoDB: " + e.getMessage());
             e.printStackTrace();
@@ -67,11 +98,11 @@ public class MongoDBConnection {
 
     public static void main(String[] args) {
         MongoDBConnection connection = new MongoDBConnection();
-        MongoDatabase database = connection.getDatabase();
+
 
         // Exemplo de uso
-        if (database != null) {
-            System.out.println("Banco de dados: " + database.getName());
+        if (connection.getDatabase() != null) {
+            System.out.println("Banco de dados: " + connection.getDatabase().getName());
         }
 
 
@@ -82,37 +113,9 @@ public class MongoDBConnection {
             e.printStackTrace();
         }
 
-        UsuarioOperations usuarioOperations = new UsuarioOperations(database);
-
-        Usuario u1 = new Usuario("Alice", 25);
-        Usuario u2 = new Usuario("Bob", 30);
-        Usuario u3 = new Usuario("Charlie", 35);
-
-        System.out.println("Criando usuarios Alice, Bob e Charlie");
-        List<Usuario> usuarios = new ArrayList<>();
-        usuarios.add(u1);
-        usuarios.add(u2);
-        usuarios.add(u3);
-
-      usuarioOperations.insertUsuariosList(usuarios);
-
-
-        System.out.println("Alterando a idade de Bob de 30 para 32 anos:");
-        u2.setIdade(32);
-        usuarioOperations.updateUsuario(u2);
-
-        System.out.println("Consultando todos os registros: ");
-        List<Usuario> todosUsuarios = usuarioOperations.readAllUsuarios();
-        todosUsuarios.forEach(u -> System.out.println(u.toString()));
-
-        System.out.println("Deletando Charlie");
-        usuarioOperations.deleteUsuario(u3);
-
-        System.out.println("Consultando todos os registros: ");
-        todosUsuarios = usuarioOperations.readAllUsuarios();
-        todosUsuarios.forEach(u -> System.out.println(u.toString()));
 
         connection.closeConnection();
+
     }
 
 
